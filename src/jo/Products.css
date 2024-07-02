@@ -1,0 +1,90 @@
+.products{
+    display: flex;
+    justify-content: center;
+    border: 1.3px solid orangered;
+    border-radius: 8px;
+    width: fit-content;
+    padding: 1% 2% 1% 2%;
+    gap: 40px;
+    margin-left: 28%;
+    margin-top: 2%;
+}
+.groceryImg{
+    height: 350px;
+    width: 450px;
+    border-radius: 10px;
+}
+.list{
+    line-height: normal;
+}
+.orderId{
+    font-size: 14px;
+}
+.name{
+    font-size: 25px;
+    font-weight: bold;
+}
+.brand{
+    text-decoration: underline 3px;
+    text-decoration: burlywood;
+    font-weight: 500;
+}
+.color{
+    width: fit-content;
+}
+.main{
+    margin-top: 2%;
+}
+.main h1{
+    text-align: center;
+}
+.update{
+    width: fit-content;
+    background-color: orange;
+    border-radius: 8px;
+    padding: 12px 40px 12px 40px;
+    border: 1.3px solid orange;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.delete{
+        width: fit-content;
+        background-color: orange;
+        border-radius: 8px;
+        padding: 12px 40px 12px 40px;
+        border: 1.3px solid orange;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+        text-transform: capitalize;
+       
+        
+}
+.add-button{
+    border-radius: 8px;
+    padding: 5px 10px 5px 10px;
+    background-color: #eeeeee;
+    border: none;
+    margin-left: 9px;
+    cursor: pointer;
+}
+.less-button{
+    border-radius: 8px;
+    padding: 5px 10px 5px 10px;
+    background-color: #eeeeee;
+    border: none;
+    cursor: pointer;
+}
+.success-button{
+    border-radius: 8px;
+    padding: 5px 10px 5px 10px;
+    background-color: #eeeeee;
+    border: none;
+    margin-left: 9px;
+    cursor: pointer;
+}

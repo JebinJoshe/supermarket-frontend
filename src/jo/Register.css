@@ -1,0 +1,86 @@
+.register{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8%;
+    margin-top: 8%;
+}
+.regheading{
+    font-size: 70px;
+    text-align: center;
+    
+}
+
+input{
+    border: none;
+    outline: none;
+    width: 350px;
+    background-color: #f3f3f3;
+    padding: 12px 12px 12px 12px;
+    border-radius:7px;
+    margin-top: 6px;
+
+}
+.regname{
+    display: flex;
+    flex-direction: column;
+    margin-left: 23px;
+    margin-top: -30px;
+}
+.regemail{
+    display: flex;
+    flex-direction: column;
+    margin-left: 23px;
+
+
+}
+.regpassword{
+    margin-top: 7px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 23px;
+
+}
+.regadders{
+    display: flex;
+    flex-direction: column;
+    margin-left: 23px;
+}
+.regbutton{
+    width: 373px;
+    margin-left: 23px;
+    border: none;
+    outline: none;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 7px;
+    background-color: black;
+    color: white;
+    transition: all .5s ease-in-out;
+    font-size: 17px;
+}
+.regbutton:hover{
+    background-color: #e2a64d;
+    color: rgb(248, 247, 247);
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+}
+.regimg{
+    height: 600px;
+    width: 600px;
+}
+.regp{
+    position: absolute;
+    text-align: center;
+    margin-top: -60px;
+    color: rgb(255, 166, 2);
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 9px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid orange;
+
+}
