@@ -23,7 +23,7 @@ const ProductList = () => {
     if (userId) {
       fetchProducts();
     }
-  }, [userId]);
+  }, [userId,fetchProducts]);
 
   const fetchProducts = async () => {
     try {
