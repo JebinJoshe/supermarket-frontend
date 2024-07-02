@@ -12,7 +12,7 @@ const Home = () => {
       const g = localStorage.getItem('user')
       //console.log(JSON.parse(g));
       const t = JSON.parse(g);
-      setUseName(t.name);
+      setUseName(t?.name);
     } else {
       setUseName('');
     }
