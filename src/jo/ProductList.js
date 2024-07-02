@@ -15,25 +15,23 @@ const ProductList = () => {
     if (check) {
       const getUserId = localStorage.getItem("user");
       const getUser = JSON.parse(getUserId);
-      setUserId(getUser.id);
+      setUserId(getUser?.id);
+      if(getUser?.id){
+        fetchProducts(getUser?.id);
+      }
     }
   }, []);
 
-  useEffect(() => {
-    if (userId) {
-      fetchProducts();
-    }
-  }, [userId,fetchProducts]);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (userid) => {
     try {
       const res = await axios.get(
-        `https://supermarket-data-mrti.onrender.com/api/products/${userId}`
+        `https://supermarket-data-mrti.onrender.com/api/products/${userid}`
       );
       if (res.status === 200) {
         setError(false);
-        setProducts(res.data.products);
-        console.log(res.data.products);
+        setProducts(res?.data?.products);
+        console.log(res?.data?.products);
       } else {
         setError(true);
       }
