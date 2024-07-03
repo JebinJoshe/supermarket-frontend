@@ -3,19 +3,19 @@
     justify-content: center;
     border: 1.3px solid orangered;
     border-radius: 8px;
-    width: fit-content;
+    width: 760px;
     padding: 1% 2% 1% 2%;
     gap: 40px;
-    margin-left: 28%;
+    margin-left: 25%;
     margin-top: 2%;
 }
 .groceryImg{
-    height: 350px;
-    width: 450px;
+    height:320px;
+    width: 550px;
     border-radius: 10px;
 }
-.list{
-    line-height: normal;
+.list p{
+   margin-bottom: -5px;
 }
 .orderId{
     font-size: 14px;
@@ -23,6 +23,7 @@
 .name{
     font-size: 25px;
     font-weight: bold;
+    margin-top: 10px;
 }
 .brand{
     text-decoration: underline 3px;
@@ -38,8 +39,8 @@
 .main h1{
     text-align: center;
 }
-.update{
-    width: fit-content;
+.updates{
+    width: 130px;
     background-color: orange;
     border-radius: 8px;
     padding: 12px 40px 12px 40px;
@@ -51,7 +52,7 @@
     text-transform: capitalize;
 }
 .delete{
-        width: fit-content;
+        width: 130px;
         background-color: orange;
         border-radius: 8px;
         padding: 12px 40px 12px 40px;
@@ -88,3 +89,45 @@
     margin-left: 9px;
     cursor: pointer;
 }
+
+.spinner {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+  }
+  .spinners {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    border-top-color:  black;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .cancel-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #ff3333;
+  }
+  
+  button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }

@@ -10,33 +10,35 @@
     text-align: center;
     font-size: 3rem;
 }
-.update button {
-    width: 370px;
+.updatebutton {
+    width: 373px;
+    margin-left: 0px;
+    border: none;
+    outline: none;
+    height: 40px;
+    margin-top: 2%;
+    border-radius: 7px;
+    padding-top: 5px;
     background-color: orange;
     color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 15px 20px 15px 20px;
-    font-size: 16px;
-    margin-top: 3%;
+    transition: all .5s ease-in-out;
+    font-size: 17px;
     cursor: pointer;
 }
-.update button:hover{
-    background-color: white;
-    color: orange;
-    border: 1.5px solid orange;
-}
-.update .message{
-    position: absolute;
-    bottom: 0;
+
+.update .message {
+    position: fixed; /* Changed from absolute to fixed for better centering across the viewport */
+    left: 50%;
+    bottom: -0;
+    transform: translate(-50%, -50%); /* This centers the element */
     text-align: center;
-    margin-bottom: 100px;
     color: rgb(255, 166, 2);
-    padding-top: 5px;
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-bottom: 9px;
+    padding: 15px 20px;
     font-size: 20px;
     border-radius: 10px;
     border: 2px solid orange;
+    background-color: rgba(255, 255, 255, 0.9); /* Optional: adds a slight background for better readability */
+    z-index: 1000; /* Ensures the message appears above other elements */
+    max-width: 80%; /* Prevents the message from becoming too wide on large screens */
+    width: auto; /* Allows the width to adjust to the content */
 }

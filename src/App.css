@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.regbutton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Remove arrow buttons for number input in Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove arrow buttons for number input in Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

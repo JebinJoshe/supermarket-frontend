@@ -9,6 +9,9 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(null);
+  const [validImageUrls, setValidImageUrls] = useState({});
 
   useEffect(() => {
     const check = localStorage.getItem("userId");
@@ -21,7 +24,6 @@ const ProductList = () => {
       }
     }
   }, []);
-
 
   const fetchProducts = async (userid) => {
     try {
@@ -55,6 +57,7 @@ const ProductList = () => {
   };
 
   const handleUpdate = async (product) => {
+    setIsUpdating(product._id);
     try {
       const res = await axios.put(
         "https://supermarket-data-mrti.onrender.com/api/products/updateProduct",
@@ -68,26 +71,62 @@ const ProductList = () => {
           product_color: product.product_color,
         }
       );
-      //console.log(res)
       if (res) {
         setEditingProduct(null);
-        fetchProducts();
+        fetchProducts(userId);
       }
     } catch (err) {
       console.error("Error updating product:", err);
+    } finally {
+      setIsUpdating(null);
     }
   };
 
   const handleDelete = async (productId) => {
+    setIsDeleting(productId._id);
     try {
-      await axios.delete(`http://localhost:5000/api/products/deleteProduct`, {
+      await axios.delete(`https://supermarket-data-mrti.onrender.com/api/products/deleteProduct`, {
         params: { user_id: userId, order_no: productId.order_no },
       });
-      fetchProducts();
+      fetchProducts(userId);
     } catch (err) {
       console.error("Error deleting product:", err);
+    } finally {
+      setIsDeleting(null);
     }
   };
+
+
+  const isValidImageUrl = (url) => {
+    if (!url) return false;
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = url;
+    });
+  };
+
+
+
+  useEffect(() => {
+    const checkImageUrls = async () => {
+      const urlChecks = await Promise.all(
+        products.map(async (product) => {
+          const isValid = await isValidImageUrl(product.image_url);
+          return [product._id, isValid];
+        })
+      );
+      setValidImageUrls(Object.fromEntries(urlChecks));
+    };
+
+    if (products.length > 0) {
+      checkImageUrls();
+    }
+  }, [products]);
+  
+  
+  
 
   return (
     <>
@@ -98,8 +137,16 @@ const ProductList = () => {
             <ul>
               {products.map((product) => (
                 <div className="products" key={product._id}>
-                  <div>
-                    <img src={shop} alt="grocery" className="groceryImg" />
+                  <div  className="groceryImg">
+                  <img 
+                      src={validImageUrls[product._id] ? product.image_url : shop} 
+                      alt="grocery" 
+                      className="groceryImg"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = shop;
+                      }}
+                    />
                   </div>
                   <div className="list">
                     <p className="orderId">order no: {product.order_no}</p>
@@ -117,7 +164,6 @@ const ProductList = () => {
                     >
                       {product.product_color}
                     </p>
-                    {/* <p className='size'>{product.product_size}</p> */}
                     <p className="price">₹{product.product_size}</p>
                     <p className="quantity">
                       Quantity: {product.quantity || 1}
@@ -139,29 +185,34 @@ const ProductList = () => {
                         <button
                           onClick={() => handleUpdate(product)}
                           className="success-button"
+                          disabled={isUpdating === product._id}
                         >
-                          ✓
+                          {isUpdating === product._id ? <span className="spinners"></span> : '✓'}
+                        </button>
+                        <button
+                          onClick={() => setEditingProduct(null)}
+                          className="cancel-button"
+                        >
+                          ✕
                         </button>
                       </div>
                     ) : (
                       <p>
-                        {" "}
                         <button
                           onClick={() => handleEdit(product)}
-                          className="update"
-                          style={{ marginLeft: "-3px" }}
+                          className="updates"
                         >
                           update
                         </button>
                       </p>
                     )}
                     <p>
-                      {" "}
                       <button
                         onClick={() => handleDelete(product)}
                         className="delete"
+                        disabled={isDeleting === product._id}
                       >
-                        Delete
+                        {isDeleting === product._id ? <span className="spinner"></span> : 'Delete'}
                       </button>
                     </p>
                   </div>

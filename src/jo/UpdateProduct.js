@@ -16,6 +16,7 @@ const AddProduct = () => {
 
   const [userId, setUserId] = useState('');
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const check = localStorage.getItem('userId');
@@ -40,6 +41,7 @@ const AddProduct = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+    setIsLoading(true);
     try {
       const res = await axios.post(`https://supermarket-data-mrti.onrender.com/api/products/add`, {
         ...product,
@@ -47,9 +49,9 @@ const AddProduct = () => {
       });
       console.log(res);
       setMessage('Product added successfully!');
-      setTimeout(()=>{
-        setMessage('')
-      },4000)
+      setTimeout(() => {
+        setMessage('');
+      }, 4000);
       // Clear form fields after successful submission
       setProduct({
         product_name: '',
@@ -64,61 +66,65 @@ const AddProduct = () => {
     } catch (error) {
       console.error('Error adding product:', error);
       setMessage('Error adding product. Please try again.');
-      setTimeout(()=>{
-        setMessage('')
-      },4000)
+      setTimeout(() => {
+        setMessage('');
+      }, 4000);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
-    {userId ?
-    <>
-    <h1 className='updateHead'>Add Products</h1>
-    <form className='update' onSubmit={onSubmit}>
-      {message && <div className="message">{message}</div>}
-      
-      <div>
-        <label>Order Number</label>
-        <input type="text" name="order_no" value={product.order_no} readOnly />
-      </div>
-      <div>
-        <label>Product Name</label>
-        <input type="text" name="product_name" value={product.product_name} onChange={onChange} required />
-      </div>
-      <div>
-        <label>Product Brand</label>
-        <input type="text" name="product_brand" value={product.product_brand} onChange={onChange} required />
-      </div>
-      <div>
-        <label>Amount per item</label>
-        <input type="text" name="product_size" value={product.product_size} onChange={onChange} />
-      </div>
-      <div>
-        <label>Product Color</label>
-        <input type="text" name="product_color" value={product.product_color} onChange={onChange} />
-      </div>
-      <div>
-        <label>Quantity</label>
-        <input type="text" name="quantity" value={product.quantity} onChange={onChange} required /> 
-      </div>
-      <div>
-        <label>Image URL</label>
-        <input type="text" name="image_url" value={product.image_url} onChange={onChange} />
-      </div>
-      <button type="submit">Add Product</button>
-    </form>
+      {userId ? (
+        <>
+          <h1 className='updateHead'>Add Products</h1>
+          <form className='update' onSubmit={onSubmit}>
+            {message && <div className="message">{message}</div>}
+            
+            <div>
+              <label>Order Number</label>
+              <input type="text" name="order_no" value={product.order_no} readOnly />
+            </div>
+            <div>
+              <label>Product Name</label>
+              <input type="text" name="product_name" value={product.product_name} onChange={onChange} required />
+            </div>
+            <div>
+              <label>Product Brand</label>
+              <input type="text" name="product_brand" value={product.product_brand} onChange={onChange} required />
+            </div>
+            <div>
+              <label>Amount per item</label>
+              <input type="number" name="product_size" value={product.product_size} onChange={onChange} />
+            </div>
+            <div>
+              <label>Product Color</label>
+              <input type="text" name="product_color" value={product.product_color} onChange={onChange} />
+            </div>
+            <div>
+              <label>Quantity</label>
+              <input type="number" name="quantity" value={product.quantity} onChange={onChange} required /> 
+            </div>
+            <div>
+              <label>Image URL</label>
+              <input type="text" name="image_url" value={product.image_url} onChange={onChange} />
+            </div>
+            <button type="submit" disabled={isLoading} className='updatebutton'>
+              {isLoading ? <span className="spinner"></span> : 'Add Product'}
+            </button>
+          </form>
+        </>
+      ) : (
+        <div>
+          <h1 className='headingLog'>Please login or register to continue</h1>
+          <div className='logButtons'>
+            <Link to="/login"><button className='log' >Login</button></Link>
+            <Link to="/register"> <button className='logReg'>Register</button></Link>
+          </div>
+        </div>
+      )}
     </>
-    :
-    <div>
-      <h1 className='headingLog'>Please login or register to continue</h1>
-      <div className='logButtons'>
-      <Link to="/login"><button className='log' >Login</button></Link>
-      <Link to="/register"> <button className='logReg'>Register</button></Link>
-      </div>
-    </div>
-}
-</>
   );
 };
 
