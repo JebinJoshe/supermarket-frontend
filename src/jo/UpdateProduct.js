@@ -43,7 +43,7 @@ const AddProduct = () => {
     setMessage('');
     setIsLoading(true);
     try {
-      const res = await axios.post(`https://supermarket-data-mrti.onrender.com/api/products/add`, {
+      const res = await axios.post(`https://jebinjoshe-supermarket-backend-5k42.onrender.com/api/products/add`, {
         ...product,
         user_id: userId
       });

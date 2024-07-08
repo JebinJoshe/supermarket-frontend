@@ -28,7 +28,7 @@ const ProductList = () => {
   const fetchProducts = async (userid) => {
     try {
       const res = await axios.get(
-        `https://supermarket-data-mrti.onrender.com/api/products/${userid}`
+        `https://jebinjoshe-supermarket-backend-5k42.onrender.com/api/products/${userid}`
       );
       if (res.status === 200) {
         setError(false);
@@ -60,7 +60,7 @@ const ProductList = () => {
     setIsUpdating(product._id);
     try {
       const res = await axios.put(
-        "https://supermarket-data-mrti.onrender.com/api/products/updateProduct",
+        "https://jebinjoshe-supermarket-backend-5k42.onrender.com/api/products/updateProduct",
         {
           order_no: product.order_no,
           user_id: userId,
@@ -85,7 +85,7 @@ const ProductList = () => {
   const handleDelete = async (productId) => {
     setIsDeleting(productId._id);
     try {
-      await axios.delete(`https://supermarket-data-mrti.onrender.com/api/products/deleteProduct`, {
+      await axios.delete(`https://jebinjoshe-supermarket-backend-5k42.onrender.com/api/products/deleteProduct`, {
         params: { user_id: userId, order_no: productId.order_no },
       });
       fetchProducts(userId);

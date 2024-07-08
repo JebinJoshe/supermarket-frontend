@@ -18,7 +18,7 @@ const Register = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('https://supermarket-data-mrti.onrender.com/api/users/register', { name, email, password, address });
+      const response = await axios.post('https://jebinjoshe-supermarket-backend-5k42.onrender.com/api/users/register', { name, email, password, address });
       
       if(response?.status === 200){
         localStorage.setItem('token', response?.data?.token);
